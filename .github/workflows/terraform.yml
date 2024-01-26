@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-inputs:
+variables:
   terraform_version:
     description: Version of terraform
     required: true
