@@ -12,7 +12,13 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.terraform_version }}
