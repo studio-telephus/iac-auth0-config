@@ -1,6 +1,11 @@
 name: terraform apply
 description: Apply a terraform configuration
 
+on:
+  push:
+    branches:
+      - main
+
 inputs:
   terraform_version:
     description: Version of terraform
