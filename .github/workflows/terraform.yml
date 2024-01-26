@@ -17,8 +17,7 @@ jobs:
         with:
           terraform_version: ${{ env.terraform_version }}
 
-      - name: terraform init
-        id: init
+      - name: init
         shell: bash
         working-directory: ${{ env.path }}
         run: terraform init
@@ -28,8 +27,12 @@ jobs:
           TF_VAR_bitwarden_client_id: ${{ secrets.TF_VAR_BITWARDEN_CLIENT_ID }}
           TF_VAR_bitwarden_client_secret: ${{ secrets.TF_VAR_BITWARDEN_CLIENT_SECRET }}
 
-      - name: terraform apply
-        id: apply
+      - name: plan
+        shell: bash
+        working-directory: ${{ env.path }}
+        run: terraform plan
+
+      - name: apply
         shell: bash
         working-directory: ${{ env.path }}
         run: terraform apply -auto-approve -input=false -no-color 2>&1
