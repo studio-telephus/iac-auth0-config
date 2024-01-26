@@ -21,26 +21,26 @@ outputs:
     description: terraform plan output
     value: ${{ steps.apply.outputs.stdout }}
 
-runs:
-  using: "composite"
-  steps:
-    - uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: ${{ inputs.terraform_version }}
+jobs:
+  deploy:
+    steps:
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ inputs.terraform_version }}
 
-    - name: terraform init
-      id: init
-      shell: bash
-      working-directory: ${{ inputs.path }}
-      run: terraform init
-      env:
-        TF_VAR_bitwarden_email: ${{ secrets.TF_VAR_BITWARDEN_EMAIL }}
-        TF_VAR_bitwarden_master_password: ${{ secrets.TF_VAR_BITWARDEN_MASTER_PASSWORD }}
-        TF_VAR_bitwarden_client_id: ${{ secrets.TF_VAR_BITWARDEN_CLIENT_ID }}
-        TF_VAR_bitwarden_client_secret: ${{ secrets.TF_VAR_BITWARDEN_CLIENT_SECRET }}
+      - name: terraform init
+        id: init
+        shell: bash
+        working-directory: ${{ inputs.path }}
+        run: terraform init
+        env:
+          TF_VAR_bitwarden_email: ${{ secrets.TF_VAR_BITWARDEN_EMAIL }}
+          TF_VAR_bitwarden_master_password: ${{ secrets.TF_VAR_BITWARDEN_MASTER_PASSWORD }}
+          TF_VAR_bitwarden_client_id: ${{ secrets.TF_VAR_BITWARDEN_CLIENT_ID }}
+          TF_VAR_bitwarden_client_secret: ${{ secrets.TF_VAR_BITWARDEN_CLIENT_SECRET }}
 
-    - name: terraform apply
-      id: apply
-      shell: bash
-      working-directory: ${{ inputs.path }}
-      run: terraform apply -auto-approve -input=false -no-color 2>&1
+      - name: terraform apply
+        id: apply
+        shell: bash
+        working-directory: ${{ inputs.path }}
+        run: terraform apply -auto-approve -input=false -no-color 2>&1
