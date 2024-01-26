@@ -1,5 +1,4 @@
 name: terraform apply
-description: Apply a terraform configuration
 
 on:
   push:
