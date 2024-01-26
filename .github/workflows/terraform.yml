@@ -5,32 +5,21 @@ on:
     branches:
       - main
 
-variables:
-  terraform_version:
-    description: Version of terraform
-    required: true
-    default: "1.5.7"
-  path:
-    description: path to terraform configurations
-    required: true
-    default: "./"
-
-outputs:
-  apply:
-    description: terraform plan output
-    value: ${{ steps.apply.outputs.stdout }}
+env:
+  terraform_version: "1.5.7"
+  path: "./"
 
 jobs:
   deploy:
     steps:
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: ${{ inputs.terraform_version }}
+          terraform_version: ${{ env.terraform_version }}
 
       - name: terraform init
         id: init
         shell: bash
-        working-directory: ${{ inputs.path }}
+        working-directory: ${{ env.path }}
         run: terraform init
         env:
           TF_VAR_bitwarden_email: ${{ secrets.TF_VAR_BITWARDEN_EMAIL }}
@@ -41,5 +30,5 @@ jobs:
       - name: terraform apply
         id: apply
         shell: bash
-        working-directory: ${{ inputs.path }}
+        working-directory: ${{ env.path }}
         run: terraform apply -auto-approve -input=false -no-color 2>&1
