@@ -1,3 +1,5 @@
+.bitwarden
+apply.sh
 /tmp
 
 # Local .terraform directories
