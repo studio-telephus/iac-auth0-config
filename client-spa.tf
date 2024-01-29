@@ -3,13 +3,14 @@ resource "auth0_client" "jhi_spa" {
   description = "JHipster React Single-Page Application Client"
   app_type    = "spa"
   callbacks = [
-    "http://localhost:9000/callback"
+    "http://localhost:9000/callback",
+    "http://localhost:3000"
   ]
   oidc_conformant     = true
   # initiate_login_uri = "http://localhost:9000/login"
-  allowed_origins     = ["http://localhost:9000"]
-  allowed_logout_urls = ["http://localhost:9000"]
-  web_origins         = ["http://localhost:9000"]
+  allowed_origins     = ["http://localhost:9000", "http://localhost:3000"]
+  allowed_logout_urls = ["http://localhost:9000", "http://localhost:3000"]
+  web_origins         = ["http://localhost:9000", "http://localhost:3000"]
 
   grant_types = [
     "authorization_code",
