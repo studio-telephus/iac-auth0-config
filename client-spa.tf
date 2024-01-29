@@ -6,6 +6,7 @@ resource "auth0_client" "jhi_spa" {
     "http://localhost:9000/callback"
   ]
   oidc_conformant     = true
+  # initiate_login_uri = "http://localhost:9000/login"
   allowed_origins     = ["http://localhost:9000"]
   allowed_logout_urls = ["http://localhost:9000"]
   web_origins         = ["http://localhost:9000"]
