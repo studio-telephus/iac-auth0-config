@@ -12,14 +12,14 @@ locals {
 }
 
 resource "auth0_resource_server" "hub_api_iam_dev" {
-  name        = "hub_api_iam_dev"
-  identifier  = "https://hub-api.iam.dev.acme.corp"
-  signing_alg = "RS256"
+  name                                            = "hub_api_iam_dev"
+  identifier                                      = "https://hub-api.iam.dev.acme.corp"
+  signing_alg                                     = "RS256"
   allow_offline_access                            = true
   token_lifetime                                  = 8600
   skip_consent_for_verifiable_first_party_clients = true
-  enforce_policies = true
-  token_dialect = "access_token_authz"
+  enforce_policies                                = true
+  token_dialect                                   = "access_token_authz"
 }
 
 resource "auth0_resource_server_scopes" "hub_api_iam_dev" {

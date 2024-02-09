@@ -1,5 +1,5 @@
 terraform {
-  # backend "s3" {}
+  backend "s3" {}
   required_providers {
     auth0 = {
       source  = "auth0/auth0"

@@ -14,7 +14,7 @@ resource "auth0_role_permissions" "role_user_hub_api_permissions" {
   dynamic "permissions" {
     for_each = local.hub_api_iam_scopes
     content {
-      name        = permissions.value.name
+      name                       = permissions.value.name
       resource_server_identifier = auth0_resource_server.hub_api_iam_dev.identifier
     }
   }
